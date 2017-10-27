@@ -8,7 +8,7 @@ function redirect($message)
 }
 
 //If user is logged in her cant login
-if (empty($_SESSION['logged_in']))
+if (empty($_SESSION['email']))
 {
     //Check if user is logging in
     if (!empty($_POST['login']))
@@ -77,7 +77,6 @@ if (empty($_SESSION['logged_in']))
                                 {
                                     //Set session variables
                                     $_SESSION['user_image_path'] = empty($d_user_image_path) ? "default.png" : $d_user_image_path;
-                                    $_SESSION['logged_in'] = True;
                                     $_SESSION['username'] = $d_username;
                                     $_SESSION['email'] = $d_email;
 
@@ -105,7 +104,6 @@ if (empty($_SESSION['logged_in']))
                                 else
                                 {
                                     $_SESSION['user_image_path'] = empty($d_user_image_path) ? "default.png" : $d_user_image_path;
-                                    $_SESSION['logged_in'] = True;
                                     $_SESSION['username'] = $d_username;
                                     $_SESSION['email'] = $d_email;
                                     header("Location: ../index.php");

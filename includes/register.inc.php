@@ -8,7 +8,7 @@ function redirect($message)
 }
 
 //If user is logged in her cant register
-if (empty($_SESSION['logged_in']))
+if (empty($_SESSION['email']))
 {
     //Check if user is registering
     if (!empty($_POST['register']))

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2017 at 01:09 PM
+-- Generation Time: Oct 28, 2017 at 12:05 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -96,13 +96,6 @@ CREATE TABLE `shopping_cart` (
   `quantity` int(2) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Weak entity to link users to games in their wishlist.' ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `shopping_cart`
---
-
-INSERT INTO `shopping_cart` (`game_id`, `email`, `quantity`) VALUES
-(1, 'bialkowski.sz@gmail.com', 2);
-
 -- --------------------------------------------------------
 
 --
@@ -126,7 +119,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`email`, `username`, `password`, `forgot_password_hash`, `forgot_password_date`, `user_image_path`, `active`, `remember_me_selector`, `remember_me_verifier`) VALUES
-('bialkowski.sz@gmail.com', 'SzymonBialkowski', '$2y$10$ipzrw3e.KhdtJdCbUt2T6..F3K1jeNxrH5Sp5ZSjB8rvyWomHp3Wi', NULL, NULL, '', 0, 'df317d203923b529fd243c2ee7c845f5', '4f1fc7265d89e026546bc56de1a239543dc0a5570e2e7240e49f6d17402f772419c81c0b07799b9104e983aa36913743');
+('bialkowski.sz@gmail.com', 'SzymonBialkowski', '$2y$10$ipzrw3e.KhdtJdCbUt2T6..F3K1jeNxrH5Sp5ZSjB8rvyWomHp3Wi', NULL, NULL, 'szymonbialkowski.jpg', 0, 'f7d0a316472a54a2f60b44642ef957fb', 'f7fb41f2d47d4888d66dade84ced455ecdf2bb5edd2099fc3c68433483b91e6f7cbdf13545fe333584de661e55138af9'),
+('c15533517@mydit.ie', 'szymon9', '$2y$10$UzWpPNWP8bw8DRbPtPgTkON6sPHzyVKZvAmBzw/LeNaHjxuMdlYRq', NULL, NULL, '', 0, NULL, NULL),
+('xtehninja@gmail.com', 'szymon9', '$2y$10$6F2iTlihpLCNV2r/ULRu/O8RS98MPOn38Nsjrj3s5nKRqxdlEs.M2', NULL, NULL, '', 0, NULL, NULL);
 
 --
 -- Indexes for dumped tables

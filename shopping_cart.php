@@ -93,47 +93,10 @@ if (empty($_SESSION['email']))
 	            <hr class="navbar-underline">
 	        </ul>
 	        <hr class="vertical-hr">
-
             <?php
-            if (isset($_SESSION['logged_in']))
-            {    ?>
-                <div class="logged-in">
-                  <a href="shopping_cart.php">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <div class="numberCircle">
-                        <?php
-                        if (!empty($_SESSION['email']))
-                        {
-                            //Number of items in shopping cart
-                            $prepared_statement = $db->prepare("select count(*) from user join shopping_cart using (email) where email = ?");
-                            $prepared_statement->bind_param("s", $_SESSION['email']);
-                            $prepared_statement->execute();
-                            $prepared_statement->bind_result($shopping_cart_num);
-                            $prepared_statement->fetch();
-                            $prepared_statement->close();
-                            xss($shopping_cart_num);
-                        }
-                        ?>
-                    </div>
-                  </a>
-                  <a href="profile.php">
-                    <img class="logged-in-img" src="assets/img/users/<?php xss($_SESSION['user_image_path']); ?>" alt="Profile picture of <?php xss($_SESSION['username']); ?>">
-                  </a>
-                </div>
-            <?php
-            }
-            else
-            { ?>
-    	        <div class="login">
-    	            <i class="fa fa-unlock" aria-hidden="true"></i>
-    	            <a class="text-black nav-item-bold" href="login.php">LOGIN</a>
-    	        </div>
-    	        <div class="register">
-    	            <i class="fa fa-user-plus" aria-hidden="true"></i>
-    	            <a class="text-black nav-item-bold" href="login.php">REGISTER</a>
-    	        </div>
-            <?php
-            } ?>
+                //Include navbar user shopping cart and profile
+                require_once('includes/shopping_cart_navbar.inc.php');
+            ?>
 	    </div>
 	</nav>
 
@@ -146,7 +109,8 @@ if (empty($_SESSION['email']))
             <div class="row">
                 <div class="col-sm-12">
                     <div class="catalogue">
-						<h4 class="empty">Your shopping cart is empty :(</h4>
+                        <img class="sad-face" src="assets/img/sad.png" alt="Sad face">
+						<h4 class="empty">Your shopping cart is empty &#58;&#40;</h4>
                         <h3 class="total"></h3>
 
                         <?php

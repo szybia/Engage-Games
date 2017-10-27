@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$max_number_of_games =      100000;
-$max_quantity_per_product = 9;
+$max_number_of_games        = 100000;
+$max_quantity_per_product   = 9;
 
 if (empty($_SESSION['email']) || empty($_POST['update']))
 {

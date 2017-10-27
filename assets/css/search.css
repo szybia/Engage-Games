@@ -287,6 +287,20 @@ body {
     font-size: 20px;
 }
 
+.empty {
+    color: white;
+    font-weight: 300;
+    margin: 0;
+    transition: .3s ease-in-out;
+    margin: 30px 0 15px 0;
+
+}
+.sad-face {
+    margin: 0 auto;
+    -webkit-filter: brightness(100);
+    filter: brightness(100);
+}
+
 /*
 *    FOOTER
 */

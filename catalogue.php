@@ -79,48 +79,16 @@ function xss($message)
 	                <a class="nav-link text-black nav-item-bold" href="#">CATALOGUE</a>
 	            </li>
 	            <li class="nav-item third">
-	                <a class="nav-link text-black nav-item-bold" href="#">ABOUT</a>
+	                <a class="nav-link text-black nav-item-bold" target="_blank" href="https://github.com/SzymonB7/EngageGames">ABOUT</a>
 	            </li>
 
 	            <hr class="navbar-underline">
 	        </ul>
 	        <hr class="vertical-hr">
-
-            <?php   if (isset($_SESSION['logged_in'])) {    ?>
-                <div class="logged-in">
-                  <a href="shopping_cart.php">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <div class="numberCircle">
-                    <?php
-                        if (!empty($_SESSION['email']))
-                        {
-                            //Number of items in shopping cart
-                            $prepared_statement = $db->prepare("select count(*) from user join shopping_cart using (email) where email = ?");
-                            $prepared_statement->bind_param("s", $_SESSION['email']);
-                            $prepared_statement->execute();
-                            $prepared_statement->bind_result($shopping_cart_num);
-                            $prepared_statement->fetch();
-                            $prepared_statement->close();
-                            xss($shopping_cart_num);
-                        }
-                    ?>
-                    </div>
-                  </a>
-                  <a href="profile.php">
-                    <img class="logged-in-img" src="assets/img/users/<?php xss($_SESSION['user_image_path']); ?>" alt="Profile picture of <?php xss($_SESSION['username']); ?>">
-                  </a>
-                </div>
-            <?php } else { ?>
-    	        <div class="login">
-    	            <i class="fa fa-unlock" aria-hidden="true"></i>
-    	            <a class="text-black nav-item-bold" href="login.php">LOGIN</a>
-    	        </div>
-    	        <div class="register">
-    	            <i class="fa fa-user-plus" aria-hidden="true"></i>
-    	            <a class="text-black nav-item-bold" href="register.php">REGISTER</a>
-    	        </div>
-            <?php } ?>
-
+            <?php
+                //Include navbar user shopping cart and profile
+                require_once('includes/shopping_cart_navbar.inc.php');
+            ?>
 	    </div>
 	</nav>
 
@@ -192,9 +160,11 @@ function xss($message)
                         <?php
 
                         // Check for sorting preference
-                        if (!empty($_GET['q'])) {
+                        if (!empty($_GET['q']))
+                        {
                             //Newest games, sort by release date
-                            if ($_GET['q'] == 'newest') { ?>
+                            if ($_GET['q'] == 'newest')
+                            { ?>
                                 <?php
 
                                     $result = mysqli_query($db, "SELECT game_id, title, console, price, cover_path from game order by -release_date limit 12");
@@ -268,7 +238,6 @@ function xss($message)
                                             </div>
                                         </div>
                                     </div>
-
                             <?php
                                     }//end of for loop
                                 }//end of elseif
@@ -297,9 +266,11 @@ function xss($message)
                                 }//end of else
                             }//end of if
                         ////No sorting preference, random games
-                        else {
+                        else
+                        {
                             $result = mysqli_query($db, "SELECT game_id, title, console, price, cover_path from game order by RAND() limit 12");
-                            for ($i=0; $i < 12; $i++) {
+                            for ($i=0; $i < 12; $i++)
+                            {
                                 $row = mysqli_fetch_row($result);   ?>
 
                                 <div class="main-body-white-col">

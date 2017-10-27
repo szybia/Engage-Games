@@ -94,47 +94,10 @@ if (empty($_GET['q']) || !is_numeric($_GET['q']))
 	            <hr class="navbar-underline">
 	        </ul>
 	        <hr class="vertical-hr">
-
             <?php
-            if (isset($_SESSION['logged_in']))
-            {    ?>
-                <div class="logged-in">
-                  <a href="shopping_cart.php">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <div class="numberCircle">
-                        <?php
-                            if (!empty($_SESSION['email']))
-                            {
-                                //Number of items in shopping cart
-                                $prepared_statement = $db->prepare("select count(*) from user join shopping_cart using (email) where email = ?");
-                                $prepared_statement->bind_param("s", $_SESSION['email']);
-                                $prepared_statement->execute();
-                                $prepared_statement->bind_result($shopping_cart_num);
-                                $prepared_statement->fetch();
-                                $prepared_statement->close();
-                                xss($shopping_cart_num);
-                            }
-                        ?>
-                    </div>
-                  </a>
-                  <a href="profile.php">
-                    <img class="logged-in-img" src="assets/img/users/<?php xss($_SESSION['user_image_path']); ?>" alt="Profile picture of <?php xss($_SESSION['username']); ?>">
-                  </a>
-                </div>
-            <?php
-            }
-            else
-            { ?>
-    	        <div class="login">
-    	            <i class="fa fa-unlock" aria-hidden="true"></i>
-    	            <a class="text-black nav-item-bold" href="login.php">LOGIN</a>
-    	        </div>
-    	        <div class="register">
-    	            <i class="fa fa-user-plus" aria-hidden="true"></i>
-    	            <a class="text-black nav-item-bold" href="login.php">REGISTER</a>
-    	        </div>
-            <?php
-            } ?>
+                //Include navbar user shopping cart and profile
+                require_once('includes/shopping_cart_navbar.inc.php');
+            ?>
 	    </div>
 	</nav>
 
@@ -149,8 +112,7 @@ if (empty($_GET['q']) || !is_numeric($_GET['q']))
                                 <div class="col-sm-12">
                                     <div class="game-details">
                                         <?php
-
-                                        //Print number of items in shopping cart
+                                        //Print game details
                                         $prepared_statement = $db->prepare("select title, console, release_date, price, developer, cover_path from game where game_id = ?");
                                         $prepared_statement->bind_param("i", $_GET['q']);
                                         $prepared_statement->execute();
@@ -161,8 +123,12 @@ if (empty($_GET['q']) || !is_numeric($_GET['q']))
                                         <p><?php xss($title); ?></p>
                                         <p><?php xss($console); ?></p>
                                         <p><?php xss(mb_substr($release_date, 0, 4)); ?></p>
+                                        <p class="hidden-id"><?php xss($_GET['q']); ?></p>
                                         <p><?php xss($developer); ?></p>
                                         <p>€<?php xss($price); ?></p>
+                                        <div class="alert alert-danger quantity-error" role="alert">
+                                        </div>
+                                        <input type="number" class="form-control bfh-number game-quantity-input" placeholder="Quantity" required>
                                         <button type="button" class="btn btn-outline-dark">Add to Cart</button>
                                     </div>
                                 </div>
@@ -209,4 +175,6 @@ if (empty($_GET['q']) || !is_numeric($_GET['q']))
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/custom.js"></script>
+    <!-- AJAX adding to database -->
+    <script src="assets/js/game_add.js"></script>
 </body>

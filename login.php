@@ -8,6 +8,12 @@ require_once('includes/remember_cookie.inc.php');
 //Include CSRFToken generator
 require_once('includes/csrf_token.inc.php');
 
+//Print function to avoid XSS
+function xss($message)
+{
+    echo(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
+}
+
 //If user is logged in
 if (!empty($_SESSION['logged_in'])) {
     header("Location: index.php");
@@ -165,7 +171,7 @@ if (!empty($_SESSION['logged_in'])) {
                             <input type="password" placeholder="Confirm Password" name="password_check" spellcheck="false" required>
                             <input type="submit" name="register" value="Register Now">
                             <input type="hidden" name="CSRFToken"
-                              value="<?php echo($_SESSION['CSRFToken']); ?>">
+                              value="<?php xss($_SESSION['CSRFToken']); ?>">
                         </form>
 						<div class="login-switch">
 							<p>Login</p>
@@ -252,7 +258,7 @@ if (!empty($_SESSION['logged_in'])) {
 									<div class="forgot-pass-text">Forgot Password?</div>
 								</div>
                             <input type="hidden" name="CSRFToken"
-                              value="<?php echo($_SESSION['CSRFToken']); ?>">
+                              value="<?php xss($_SESSION['CSRFToken']); ?>">
                             <input type="submit" name="login" value="Login">
                         </form>
 						<div class="login-switch-cur">
@@ -291,7 +297,7 @@ if (!empty($_SESSION['logged_in'])) {
                         <form class="forgot" action="index.php" method="post">
                             <input type="email" name="email" placeholder="Email" spellcheck="false" required>
                             <input type="hidden" name="CSRFToken"
-                              value="<?php echo($_SESSION['CSRFToken']); ?>">
+                              value="<?php xss($_SESSION['CSRFToken']); ?>">
                             <input type="submit" value="Send Email">
                         </form>
                     </div>

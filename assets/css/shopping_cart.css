@@ -313,6 +313,13 @@ body {
     opacity: 0;
 }
 
+.sad-face {
+    margin: 0 auto;
+    -webkit-filter: brightness(100);
+    filter: brightness(100);
+    display: none;
+}
+
 .alert-primary {
     color: white;
     background-color: #343a40;

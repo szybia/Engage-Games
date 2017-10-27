@@ -197,6 +197,15 @@ body {
     display: inline-block;
 }
 
+.hidden-id {
+    display: none;
+}
+
+.quantity-error {
+    margin-top: 10px;
+    display: none;
+}
+
 /*
 *    CATALOGUE
 */
@@ -247,6 +256,11 @@ body {
     margin: 0;
     font-weight: 300;
     font-size: 20px;
+}
+
+.game-quantity-input {
+    text-align: center;
+    margin: 15px 0px;
 }
 
 .btn-outline-dark {
