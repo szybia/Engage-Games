@@ -9,3 +9,6 @@ https://dribbble.com/shots/2087652-Login-page
 
 Login box inspiration
 https://bootsnipp.com/snippets/kE9rg
+
+File upload
+https://stackoverflow.com/questions/38509334/full-secure-image-upload-script

@@ -1,5 +1,7 @@
 <?php
 
+require_once('include_only.inc.php');
+
 //If session doesn't exist
 if (empty($_SESSION['email']))
 {

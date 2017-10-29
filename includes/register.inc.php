@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once('include_only.inc.php');
+
 function redirect($message)
 {
     header("Location: ../login.php?page=register&q=$message");
@@ -77,7 +79,6 @@ if (empty($_SESSION['email']))
                             }
                             else
                             {
-
                                 if ($password != $password_check)
                                 {
                                     redirect("nonmatching");

@@ -1,4 +1,7 @@
 <?php
+
+require_once('include_only.inc.php');
+
 if (!empty($_SESSION['email']))
 {    ?>
     <div class="logged-in">

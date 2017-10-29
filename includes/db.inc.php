@@ -4,10 +4,11 @@ $dbUsername  = "root";
 $dbPassword = "";
 $dbName = "engage";
 
+require_once('include_only.inc.php');
+
 $db = mysqli_connect($dbServerName, $dbUsername, $dbPassword, $dbName);
 
 if (mysqli_connect_errno())
 {
-    echo "Unable to connect to database.";
-    exit(0);
+    die("Unable to connect to database.");
 }

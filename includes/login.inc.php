@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once('include_only.inc.php');
+
 function redirect($message)
 {
     header("Location: ../login.php?page=login&q=$message");

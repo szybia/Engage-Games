@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once('include_only.inc.php');
+
 $max_number_of_games        = 100000;
 $max_quantity_per_product   = 9;
 

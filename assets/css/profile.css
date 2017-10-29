@@ -244,7 +244,7 @@ body {
     cursor: pointer;
 }
 
-.middle:first-of-type {
+.middle-first {
     margin-top: 20px;
 }
 
@@ -254,6 +254,30 @@ body {
 
 .g-recaptcha > div {
     margin: 0 auto;
+}
+
+.hidden {
+    height: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.first-form-group {
+    margin-top: 15px;
+}
+
+.delete-account-first {
+    padding-bottom: 0;
+}
+
+.delete-account-first > p {
+    margin: 0;
+}
+
+.g-recaptcha {
+    margin-bottom: 15px;
 }
 
 
