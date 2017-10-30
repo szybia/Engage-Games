@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-require_once('include_only.inc.php');
-
 function redirect($message)
 {
     header("Location: ../profile.php?request=delete&q=$message");
@@ -35,32 +33,108 @@ else
             }
             else
             {
-                if ($_POST['CSRFToken'] != $_SESSION['CSRFToken'])
+                require_once('recaptcha.inc.php');
+
+                $siteKey = "6LdafTMUAAAAAEjOROjGfi4qCGu6UOeABrjGIWRw";
+                $secret = "6LdafTMUAAAAAGP-gquib1Ghz0M1o7aSqlHnh5Uf";
+                $lang = "en";
+                $resp = null;
+                $error = null;
+                $reCaptcha = new ReCaptcha($secret);
+                $resp = $reCaptcha->verifyResponse(
+                    $_SERVER["REMOTE_ADDR"],
+                    $_POST["g-recaptcha-response"]
+                );
+
+                if ($resp == null || !$resp->success)
                 {
-                    redirect("empty");
+                    redirect("bot");
                 }
                 else
                 {
-                    require_once('recaptcha.inc.php');
-
-                    $siteKey = "6LdafTMUAAAAAEjOROjGfi4qCGu6UOeABrjGIWRw";
-                    $secret = "6LdafTMUAAAAAGP-gquib1Ghz0M1o7aSqlHnh5Uf";
-                    $lang = "en";
-                    $resp = null;
-                    $error = null;
-                    $reCaptcha = new ReCaptcha($secret);
-                    $resp = $reCaptcha->verifyResponse(
-                        $_SERVER["REMOTE_ADDR"],
-                        $_POST["g-recaptcha-response"]
-                    );
-
-                    if ($resp == null || !$resp->success)
+                    if (!preg_match("/^[a-zA-Z0-9\@\.]*$/", $_POST['email']))
                     {
-                        redirect("bot");
+                        redirect("invalid");
                     }
                     else
                     {
+                        if (strlen($_POST['email']) > 60 || strlen($_POST['password']) > 72)
+                        {
+                            redirect("length");
+                        }
+                        else
+                        {
+                            if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
+                            {
+                                redirect("invalidemail");
+                            }
+                            else
+                            {
+                                //Include database connection
+                                require_once('db.inc.php');
 
+                                $email = mysqli_real_escape_string($db, $_POST['email']);
+
+                                if ($email != $_SESSION['email'])
+                                {
+                                    redirect("email");
+                                }
+                                else
+                                {
+                                    $prepared_statement = $db->prepare("SELECT password FROM user WHERE email = ?");
+                                    $prepared_statement->bind_param("s", $email);
+                                    $prepared_statement->execute();
+                                    $prepared_statement->store_result();
+                                    $num_of_rows = $prepared_statement->num_rows();
+
+                                    if ($num_of_rows < 1)
+                                    {
+                                        redirect("nouser");
+                                    }
+                                    else
+                                    {
+                                        $prepared_statement->bind_result($d_password);
+                                        $prepared_statement->fetch();
+                                        $prepared_statement->close();
+
+                                        $password = mysqli_real_escape_string($db, $_POST['password']);
+
+                                        if (!password_verify($password, $d_password))
+                                        {
+                                            redirect("password");
+                                        }
+                                        else
+                                        {
+                                            $prepared_statement = $db->prepare("DELETE FROM USER WHERE EMAIL = ?");
+                                            $prepared_statement->bind_param("s", $email);
+                                            $prepared_statement->execute();
+                                            $prepared_statement->close();
+
+                                            $prepared_statement = $db->prepare("DELETE FROM SHOPPING_CART WHERE EMAIL = ?");
+                                            $prepared_statement->bind_param("s", $email);
+                                            $prepared_statement->execute();
+                                            $prepared_statement->close();
+
+                                            if (isset($_COOKIE['remembermeengage']))
+                                            {
+                                                setcookie(
+                                                  "remembermeengage",
+                                                  null,
+                                                  time() - 3600, "/"
+                                                );
+                                                unset($_COOKIE['remembermeengage']);
+                                            }
+
+                                            session_unset();
+                                            session_destroy();
+
+                                            header("Location: ../index.php");
+                                            exit();
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

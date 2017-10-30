@@ -1,4 +1,12 @@
 <?php
+
+//If file is being called directly exit
+if(basename(__FILE__) == basename($_SERVER['PHP_SELF']))
+{
+    header("Location: ../index.php");
+    exit();
+}
+
 /**
  * This is a PHP library that handles calling reCAPTCHA.
  *    - Documentation and latest version

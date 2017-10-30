@@ -110,6 +110,245 @@ if (empty($_SESSION['email']))
 data-toggle="modal" data-target="#changePhoto" class="profile-picture" src="assets\img\users\<?php xss($_SESSION['user_image_path']); ?>" alt="The profile picture of <?php xss($_SESSION['username']); ?>">
                                     <h3 class="name text-white"><?php xss($_SESSION['username']); ?></h3>
                                     <h5 class="text-white"><?php xss($_SESSION['email']); ?></h5>
+                                    <?php
+                                    if (!empty($_GET['request']))
+                                    {
+                                        switch ($_GET['request'])
+                                        {
+                                            case 'password':
+                                                if (!empty($_GET['q']))
+                                                {
+                                                    switch ($_GET['q'])
+                                                    {
+                                                        case 'empty':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Password</h4>
+                                                                Please fill out all the fields.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'lenght':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Password</h4>
+                                                                Your password is too long. Max 72
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'nonmatching':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Password</h4>
+                                                                Your passwords did not match.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'incorrect':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Password</h4>
+                                                                Incorrect current password.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'success':
+                                                            ?>
+                                                            <div class="alert alert-success" role="alert">
+                                                                <h4>Change Password</h4>
+                                                                You've successfully changed your password.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+                                                break;
+
+                                            case 'name':
+                                                if (!empty($_GET['q']))
+                                                {
+                                                    switch ($_GET['q'])
+                                                    {
+                                                        case 'empty':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Name</h4>
+                                                                Please fill out all the fields.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'invalid':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Name</h4>
+                                                                Please only enter numbers and letters.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'lenght':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Name</h4>
+                                                                Input is too long.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'nouser':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Name</h4>
+                                                                This user doesn't exist.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'incorrect':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Name</h4>
+                                                                Incorrect password.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'success':
+                                                            ?>
+                                                            <div class="alert alert-success" role="alert">
+                                                                <h4>Change Name</h4>
+                                                                You've successfully changed your name.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+                                                break;
+
+                                            case 'email':
+                                                if (!empty($_GET['q']))
+                                                {
+                                                    switch ($_GET['q'])
+                                                    {
+                                                        case 'empty':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Email</h4>
+                                                                Please fill out all the fields.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'invalid':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Email</h4>
+                                                                Invalid characters in email.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'lenght':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Email</h4>
+                                                                Input is too long.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'nouser':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Email</h4>
+                                                                This user doesn't exist.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'incorrect':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Email</h4>
+                                                                Incorrect password.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'exists':
+                                                            ?>
+                                                            <div class="alert alert-danger" role="alert">
+                                                                <h4>Change Email</h4>
+                                                                User with this email already exists.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        case 'success':
+                                                            ?>
+                                                            <div class="alert alert-success" role="alert">
+                                                                <h4>Change Email</h4>
+                                                                You've successfully changed your email.
+                                                            </div>
+                                                            <?php
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                }
+                                                break;
+
+                                                case 'picture':
+                                                    if (!empty($_GET['q']))
+                                                    {
+                                                        switch ($_GET['q'])
+                                                        {
+                                                            case 'empty':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Change Photo</h4>
+                                                                    Empty photo sent.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            case 'ext':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Change Photo</h4>
+                                                                    Invalid extension.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            case 'size':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Change Photo</h4>
+                                                                    Photo is too large.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            case 'invalidimage':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Change Photo</h4>
+                                                                    Invalid image.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            case 'servererror':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Change Photo</h4>
+                                                                    Server has encountered an error.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            default:
+                                                                break;
+                                                        }
+                                                    }
+                                                    break;
+
+                                            default:
+                                                break;
+                                        }
+                                    }
+
+                                    ?>
                                     <a href="shopping_cart.php">
                                         <button type="button" class="btn btn-light middle middle-first">Shopping cart</button>
                                     </a>
@@ -125,7 +364,7 @@ data-toggle="modal" data-target="#changePhoto" class="profile-picture" src="asse
                                     <button type="button" class="btn btn-light middle" data-toggle="modal" data-target="#deleteAcc">
                                         Delete Account
                                     </button>
-                                    <a href="/includes/logout.inc.php">
+                                    <a href="includes/logout.inc.php">
                                         <button type="button" class="btn btn-light middle">Logout</button>
                                     </a>
                                 </div>
@@ -261,7 +500,7 @@ data-toggle="modal" data-target="#changePhoto" class="profile-picture" src="asse
                 </div>
                 <div class="modal-body">
                     <form action="includes/delete_account.inc.php" method="post">
-                        <div class="alert alert-danger hidden" role="alert">
+                        <div class="alert alert-danger hidden-tick" role="alert">
                           Please tick the reCaptcha box.
                         </div>
                       <div class="form-group first-form-group">
@@ -308,7 +547,7 @@ All rights reserved.</h3>
 	  	</div>
 	  </div>
 	</footer>
-<script src="assets/js/file_input.js"></script>
+    <script src="assets/js/file_input.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <!--  JQuery JavaScript     -->
 	<script src="assets/js/jquery.min.js"></script>
@@ -318,6 +557,6 @@ All rights reserved.</h3>
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/custom.js"></script>
-    <!-- Recaptcha JS -->
-    <script src="assets/js/recaptcha_required.js"></script>
+    <!-- Profile JS -->
+    <script src="assets/js/profile.js"></script>
 </body>

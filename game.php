@@ -126,10 +126,13 @@ if (empty($_GET['q']) || !is_numeric($_GET['q']))
                                         <p class="hidden-id"><?php xss($_GET['q']); ?></p>
                                         <p><?php xss($developer); ?></p>
                                         <p>€<?php xss($price); ?></p>
+                                        <div class="alert alert-danger hidden" role="alert">
+                                          Please log-in.
+                                        </div>
                                         <div class="alert alert-danger quantity-error" role="alert">
                                         </div>
                                         <input type="number" class="form-control bfh-number game-quantity-input" placeholder="Quantity" required>
-                                        <button type="button" class="btn btn-outline-dark">Add to Cart</button>
+                                        <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#addCart">Add to Cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -138,6 +141,25 @@ if (empty($_GET['q']) || !is_numeric($_GET['q']))
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="addCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Added <?php xss($title); ?> to cart.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close">Continue Shopping</button>
+            <a href="shopping_cart.php">
+                <button type="button" class="btn btn-outline-dark">Go to shopping cart.</button>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
 
 
@@ -171,6 +193,8 @@ if (empty($_GET['q']) || !is_numeric($_GET['q']))
 
     <!--  JQuery JavaScript     -->
 	<script src="assets/js/jquery.min.js"></script>
+    <!--  Popper JavaScript  -->
+    <script src="assets/js/popper.min.js"></script>
     <!--  Bootstrap JavaScript  -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- Custom JS -->

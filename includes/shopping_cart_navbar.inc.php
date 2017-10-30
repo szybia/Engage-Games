@@ -1,6 +1,11 @@
 <?php
 
-require_once('include_only.inc.php');
+//If file is being called directly exit
+if(basename(__FILE__) == basename($_SERVER['PHP_SELF']))
+{
+    header("Location: ../index.php");
+    exit();
+}
 
 if (!empty($_SESSION['email']))
 {    ?>
@@ -20,7 +25,7 @@ if (!empty($_SESSION['email']))
             ?>
         </div>
       </a>
-      <a href="profile.php">
+      <a title="profile" href="profile.php">
         <img class="logged-in-img" src="assets/img/users/<?php xss($_SESSION['user_image_path']); ?>" alt="Profile picture of <?php xss($_SESSION['username']); ?>">
       </a>
     </div>

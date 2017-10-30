@@ -267,6 +267,22 @@ body {
     margin-top: 10px;
 }
 
+.hidden {
+    height: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.modal-title {
+    font-weight: 300;
+}
+
+.modal-footer {
+    margin: 0 auto;
+}
+
 /*
 *    FOOTER
 */

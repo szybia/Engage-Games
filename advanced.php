@@ -58,7 +58,7 @@ function xss($message)
 		<div class="container-fluid">
 			<div class="row nav-center">
 				<div class="col-sm-12 nav-center">
-					<form class="navbar-form align-middle" role="search">
+					<form class="navbar-form align-middle" action="search.php" role="search">
 			        <div class="input-group nav-search">
 			            <input type="text" class="form-control" placeholder="FIFA 18" name="q">
 			            <div class="input-group-btn">

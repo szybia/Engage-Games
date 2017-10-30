@@ -1,17 +1,18 @@
 $(window).on("load", function() {
+
+    $(".register-form").hide();
+    $(".forgot-form").hide();
     if ($('.register-box').find('.alert').length)
     {
         $(".login-form").hide();
         $(".register-form").show();
-        $(".register-box").css("height", "420px");
+        $(".register-box").css("height", "500px");
+        $(".main-logo-box").css("height", "40%");
     }
     if ($('.login-box').find('.alert').length)
     {
         $(".login-box").css("height", "370px");
     }
-
-    $(".register-form").hide();
-    $(".forgot-form").hide();
     $(".remember-me-button").click(function(){
         $(this).toggleClass("ticked");
         $(".remember-me-checkbox").prop("checked", true);

@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-require_once('include_only.inc.php');
-
 function redirect($message)
 {
     header("Location: ../profile.php?request=password&q=$message");
@@ -11,19 +9,19 @@ function redirect($message)
 
 if (empty($_SESSION['email']))
 {
-    redirect("loggedin");
+    redirect("");
 }
 else
 {
     if (empty($_POST['CSRFToken']))
     {
-        redirect("csrftoken");
+        redirect("empty");
     }
     else
     {
         if ($_POST['CSRFToken'] != $_SESSION['CSRFToken'])
         {
-            redirect("invalidtoken");
+            redirect("empty");
         }
         else
         {
@@ -36,15 +34,15 @@ else
             }
             else
             {
-
                 if ($_POST['CSRFToken'] != $_SESSION['CSRFToken'])
                 {
                     redirect("empty");
                 }
                 else
                 {
-
-                    if (strlen($new_password) > 72)
+                    if (strlen($_POST['new_password'])      > 72 ||
+                        strlen($_POST['current_password'])  > 72 ||
+                        strlen($_POST['new_password_check'] > 72)   )
                     {
                         redirect("lenght");
                     }

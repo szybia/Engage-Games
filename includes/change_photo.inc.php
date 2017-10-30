@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-require_once('include_only.inc.php');
-
 function redirect($message)
 {
     header("Location: ../profile.php?request=picture&q=$message");
@@ -11,19 +9,19 @@ function redirect($message)
 
 if (empty($_SESSION['email']))
 {
-    redirect("loggedin");
+    redirect("");
 }
 else
 {
     if (empty($_POST['CSRFToken']))
     {
-        redirect("csrftoken");
+        redirect("empty");
     }
     else
     {
         if ($_POST['CSRFToken'] != $_SESSION['CSRFToken'])
         {
-            redirect("invalidtoken");
+            redirect("empty");
         }
         else
         {

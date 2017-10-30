@@ -1,5 +1,3 @@
-Login register error
 Forgot password
-Profile
 Setup email
 Add more games

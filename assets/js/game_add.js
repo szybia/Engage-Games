@@ -14,15 +14,22 @@ $(".btn.btn-outline-dark").click(function()
             update[$(".hidden-id").text()] = $(".game-quantity-input").val();
             pressed = true;
 
-            //Asynchronous communication to set quantity to 0
-            $.ajax({
-              type: "POST",
-              url: "includes/shopping_cart_update.php",
-              data: "update=" + JSON.stringify(update),
-              dataType: "json"
-            });
+            if (!$(".logged-in").length)
+            {
+                $(".hidden").animate({opacity: "100", height: "50px", padding: "10px"});
+            }
+            else
+            {
+                $(".numberCircle").html(parseInt($(".numberCircle").html()) + 1);
 
-            window.location.href = "shopping_cart.php";
+                //Asynchronous communication to set quantity to 0
+                $.ajax({
+                  type: "POST",
+                  url: "includes/shopping_cart_update.php",
+                  data: "update=" + JSON.stringify(update),
+                  dataType: "json"
+                });
+            }
         }
         else
         {

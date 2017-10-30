@@ -1,6 +1,11 @@
 <?php
 
-require_once('include_only.inc.php');
+//If file is being called directly exit
+if(basename(__FILE__) == basename($_SERVER['PHP_SELF']))
+{
+    header("Location: ../index.php");
+    exit();
+}
 
 //If session doesn't exist
 if (empty($_SESSION['email']))

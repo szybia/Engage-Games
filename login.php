@@ -146,17 +146,17 @@ if (!empty($_SESSION['logged_in'])) {
                                             </div>
                                             <?php
                                             break;
-                                        case "success":
-                                            ?>
-                                            <div class="alert alert-success" role="alert">
-                                              You have successfully registered!
-                                            </div>
-                                            <?php
-                                            break;
                                         case "database":
                                             ?>
                                             <div class="alert alert-danger" role="alert">
                                               Unable to connect to the database.
+                                            </div>
+                                            <?php
+                                            break;
+                                        case "success":
+                                            ?>
+                                            <div class="alert alert-success" role="alert">
+                                              You've been registered. Please login.
                                             </div>
                                             <?php
                                             break;
@@ -169,6 +169,8 @@ if (!empty($_SESSION['logged_in'])) {
                             <input type="email" placeholder="Email" name="email" spellcheck="false" required>
                             <input type="password" placeholder="Password" name="password" spellcheck="false" required>
                             <input type="password" placeholder="Confirm Password" name="password_check" spellcheck="false" required>
+                            <div class="g-recaptcha" data-sitekey="6LdafTMUAAAAAEjOROjGfi4qCGu6UOeABrjGIWRw">
+                            </div>
                             <input type="submit" name="register" value="Register Now">
                             <input type="hidden" name="CSRFToken"
                               value="<?php xss($_SESSION['CSRFToken']); ?>">
@@ -237,7 +239,7 @@ if (!empty($_SESSION['logged_in'])) {
                                         case "success":
                                             ?>
                                             <div class="alert alert-success" role="alert">
-                                              You have successfully logged in!
+                                              You have successfully logged in
                                             </div>
                                             <?php
                                             break;
@@ -306,14 +308,14 @@ if (!empty($_SESSION['logged_in'])) {
         </div>
     </div>
 
-
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <!--  JQuery JavaScript     -->
     <script src="assets/js/jquery.min.js"></script>
     <!--  Bootstrap JavaScript  -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
     <script src="assets/js/custom.js"></script>
-    <!-- Custom Login Box -->
+    <!-- Login JS -->
     <script src="assets/js/login.js"></script>
     </body>
 </html>
