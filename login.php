@@ -15,7 +15,8 @@ function xss($message)
 }
 
 //If user is logged in
-if (!empty($_SESSION['logged_in'])) {
+if (!empty($_SESSION['email']))
+{
     header("Location: index.php");
     exit();
 }
@@ -296,7 +297,7 @@ if (!empty($_SESSION['logged_in'])) {
 								</div>
 							</div>
 						</div>
-                        <form class="forgot" action="index.php" method="post">
+                        <form class="forgot" action="includes/forgot_password.inc.php" method="post">
                             <input type="email" name="email" placeholder="Email" spellcheck="false" required>
                             <input type="hidden" name="CSRFToken"
                               value="<?php xss($_SESSION['CSRFToken']); ?>">

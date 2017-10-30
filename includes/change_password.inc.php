@@ -42,7 +42,7 @@ else
                 {
                     if (strlen($_POST['new_password'])      > 72 ||
                         strlen($_POST['current_password'])  > 72 ||
-                        strlen($_POST['new_password_check'] > 72)   )
+                        strlen($_POST['new_password_check']) > 72)
                     {
                         redirect("lenght");
                     }

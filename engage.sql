@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2017 at 12:05 AM
+-- Generation Time: Oct 31, 2017 at 12:23 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -107,7 +107,7 @@ CREATE TABLE `user` (
   `username` varchar(50) NOT NULL,
   `password` varchar(70) NOT NULL,
   `forgot_password_hash` varchar(70) DEFAULT NULL,
-  `forgot_password_date` date DEFAULT NULL,
+  `forgot_password_date` datetime DEFAULT NULL,
   `user_image_path` varchar(40) NOT NULL,
   `active` tinyint(1) DEFAULT '0',
   `remember_me_selector` varchar(32) DEFAULT NULL,
@@ -119,9 +119,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`email`, `username`, `password`, `forgot_password_hash`, `forgot_password_date`, `user_image_path`, `active`, `remember_me_selector`, `remember_me_verifier`) VALUES
-('bialkowski.sz@gmail.com', 'SzymonBialkowski', '$2y$10$ipzrw3e.KhdtJdCbUt2T6..F3K1jeNxrH5Sp5ZSjB8rvyWomHp3Wi', NULL, NULL, 'szymonbialkowski.jpg', 0, 'f7d0a316472a54a2f60b44642ef957fb', 'f7fb41f2d47d4888d66dade84ced455ecdf2bb5edd2099fc3c68433483b91e6f7cbdf13545fe333584de661e55138af9'),
-('c15533517@mydit.ie', 'szymon9', '$2y$10$UzWpPNWP8bw8DRbPtPgTkON6sPHzyVKZvAmBzw/LeNaHjxuMdlYRq', NULL, NULL, '', 0, NULL, NULL),
-('xtehninja@gmail.com', 'szymon9', '$2y$10$6F2iTlihpLCNV2r/ULRu/O8RS98MPOn38Nsjrj3s5nKRqxdlEs.M2', NULL, NULL, '', 0, NULL, NULL);
+('bialkowski.sz@gmail.com', 'SzymonBialkowski', '$2y$10$BvS7i.RfnkobLX60TypOm.mVvDWRqZ9/YEaTdHab7wzUNmfTh5MhW', NULL, NULL, '503e77826156472d37a2faeeb60bf6.jpg', 0, NULL, NULL);
 
 --
 -- Indexes for dumped tables
