@@ -66,7 +66,7 @@ else
                         {
                             if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
                             {
-                                redirect("invalidemail");
+                                redirect("invalid");
                             }
                             else
                             {
@@ -105,6 +105,8 @@ else
                                         }
                                         else
                                         {
+                                            $path = "../assets/img/users/";
+
                                             $prepared_statement = $db->prepare("DELETE FROM USER WHERE EMAIL = ?");
                                             $prepared_statement->bind_param("s", $email);
                                             $prepared_statement->execute();
@@ -123,6 +125,12 @@ else
                                                   time() - 3600, "/"
                                                 );
                                                 unset($_COOKIE['remembermeengage']);
+                                            }
+
+                                            //Delete old profile picture
+                                            if (is_writable($path . $_SESSION['user_image_path']))
+                                            {
+                                                unlink($path . $_SESSION['user_image_path']);
                                             }
 
                                             session_unset();

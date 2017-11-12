@@ -6,7 +6,7 @@ require_once('csrf_token.inc.php');
 
 function redirect($message)
 {
-    $_SESSION['reset_check'] = false;
+    unset($_SESSION['reset_check']);
     header("Location: ../login.php?page=forgot&q=$message");
     exit();
 }
@@ -15,9 +15,7 @@ if (empty($_POST['password'])               ||
     empty($_POST['password_check'])         ||
     empty($_POST['submit'])                 ||
     empty($_POST['CSRFToken'])              ||
-    empty($_SESSION['reset_check'])         ||
-    empty($_SESSION['reset_check_email'])   ||
-    $_SESSION['reset_check'] == false)
+    empty($_SESSION['reset_check_email']))
 {
     redirect("empty");
 }
@@ -65,11 +63,4 @@ else
 
     }
 }
-
-
-
-
-
-
-
 ?>

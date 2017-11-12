@@ -13,7 +13,6 @@ if (empty($_SESSION['email']))
     //Check if user is logging in
     if (!empty($_POST['login']))
     {
-
         //Cross Site Request Forgery
         if (empty($_POST['CSRFToken'])      ||
             empty($_SESSION['CSRFToken'])   ||

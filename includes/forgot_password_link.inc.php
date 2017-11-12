@@ -112,8 +112,6 @@ else
                             </div>
                         </div>
                         <?php
-
-                        $_SESSION['reset_check']                = true;
                         $_SESSION['reset_check_email']          = $email;
                         exit();
                     }

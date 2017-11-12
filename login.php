@@ -7,12 +7,8 @@ require_once('includes/db.inc.php');
 require_once('includes/remember_cookie.inc.php');
 //Include CSRFToken generator
 require_once('includes/csrf_token.inc.php');
-
 //Print function to avoid XSS
-function xss($message)
-{
-    echo(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
-}
+require_once('includes/xss.inc.php');
 
 //If user is logged in
 if (!empty($_SESSION['email']))
@@ -297,6 +293,54 @@ if (!empty($_SESSION['email']))
 								</div>
 							</div>
 						</div>
+
+                        <?php
+                        if (!empty($_GET['page']) && !empty($_GET['q']))
+                        {
+                            if ($_GET['page'] == 'forgot')
+                            {
+                                    switch ($_GET['q'])
+                                    {
+                                        case "empty":
+                                            ?>
+                                            <div class="alert alert-danger" role="alert">
+                                              Please fill out all of the fields.
+                                            </div>
+                                            <?php
+                                            break;
+                                        case "length":
+                                            ?>
+                                            <div class="alert alert-danger" role="alert">
+                                              Email is too long.
+                                            </div>
+                                            <?php
+                                            break;
+                                        case "invalid":
+                                            ?>
+                                            <div class="alert alert-danger" role="alert">
+                                              You have entered an invalid email.
+                                            </div>
+                                            <?php
+                                            break;
+                                        case "nouser":
+                                            ?>
+                                            <div class="alert alert-danger" role="alert">
+                                              You have entered an invalid email.
+                                            </div>
+                                            <?php
+                                            break;
+                                        case "success":
+                                            ?>
+                                            <div class="alert alert-success" role="alert">
+                                              Email successfully sent.
+                                            </div>
+                                            <?php
+                                            break;
+                                    }
+                            }
+                        }
+                        ?>
+
                         <form class="forgot" action="includes/forgot_password.inc.php" method="post">
                             <input type="email" name="email" placeholder="Email" spellcheck="false" required>
                             <input type="hidden" name="CSRFToken"

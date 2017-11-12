@@ -7,19 +7,10 @@ require_once('includes/db.inc.php');
 require_once('includes/remember_cookie.inc.php');
 //Include CSRFToken generator
 require_once('includes/csrf_token.inc.php');
-
 //Print function to avoid XSS
-function xss($message)
-{
-    echo(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
-}
-
-//If user isn't logged in her can't access the profile
-if (empty($_SESSION['email']))
-{
-    header("Location: index.php");
-    exit();
-}
+require_once('includes/xss.inc.php');
+//If user isn't logged in he cant see a shopping cart
+require_once('includes/redirect_home.inc.php');
 
 ?>
 
@@ -55,48 +46,11 @@ if (empty($_SESSION['email']))
 
 <body>
     <div id="loading"></div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse">
-	        <span class="navbar-toggler-icon"></span>
-	    </button>
-		<a href="index.php">
-			<img class="nav-logo" src="assets/img/logo-black.png" alt="Official Logo of Engage Games">
-		</a>
-		<div class="container-fluid">
-			<div class="row nav-center">
-				<div class="col-sm-12 nav-center">
-					<form class="navbar-form align-middle" role="search">
-			        <div class="input-group nav-search">
-			            <input type="text" class="form-control" placeholder="FIFA 18" name="q">
-			            <div class="input-group-btn">
-			                <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-			            </div>
-			        </div>
-			        </form>
-				</div>
-			</div>
-		</div>
 
-	    <div class="navbar-collapse navbar-toggleable-md collapse dual-collapse">
-	        <ul class="navbar-nav ml-auto">
-	            <li class="nav-item first">
-	                <a class="nav-link text-black nav-item-bold" href="index.php">HOME</a>
-	            </li>
-	            <li class="nav-item second">
-	                <a class="nav-link text-black nav-item-bold" href="catalogue.php">CATALOGUE</a>
-	            </li>
-	            <li class="nav-item third">
-	                <a class="nav-link text-black nav-item-bold" target="_blank" href="https://github.com/SzymonB7/EngageGames">ABOUT</a>
-	            </li>
-	            <hr class="navbar-underline">
-	        </ul>
-	        <hr class="vertical-hr">
-            <?php
-                //Include navbar user shopping cart and profile
-                require_once('includes/shopping_cart_navbar.inc.php');
-            ?>
-	    </div>
-	</nav>
+	<?php
+		//Navbar
+		require_once('includes/navbar.inc.php');
+	?>
 
     <div class="main-body">
         <div class="container">
@@ -343,6 +297,65 @@ data-toggle="modal" data-target="#changePhoto" class="profile-picture" src="asse
                                                     }
                                                     break;
 
+                                                case 'delete':
+                                                    if (!empty($_GET['q']))
+                                                    {
+                                                        switch ($_GET['q'])
+                                                        {
+                                                            case 'empty':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Delete Account</h4>
+                                                                    Please fill in all fields.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            case 'bot':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Delete Account</h4>
+                                                                    Please fill out all fields.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            case 'invalid':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Delete Account</h4>
+                                                                    Illegal email.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            case 'length':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Delete Account</h4>
+                                                                    Email or Password are too long.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            case 'email':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Delete Account</h4>
+                                                                    Your email does not match.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            case 'password':
+                                                                ?>
+                                                                <div class="alert alert-danger" role="alert">
+                                                                    <h4>Delete Account</h4>
+                                                                    Incorrect password.
+                                                                </div>
+                                                                <?php
+                                                                break;
+                                                            default:
+                                                                break;
+                                                        }
+                                                    }
+                                                    break;
+
                                             default:
                                                 break;
                                         }
@@ -521,32 +534,12 @@ data-toggle="modal" data-target="#changePhoto" class="profile-picture" src="asse
         </div>
     </div>
 
-    <footer>
-	  <div class="container footer-container">
-	  	<div class="row align-items-center">
-	  		<div class="col-sm-4">
-				<a href="#">
-	  				<img class="nav-logo" src="assets/img/logo.png" alt="Official Logo of Engage Games">
-				</a>
-	  		</div>
-	  		<div class="col-sm-4 align-center">
-					<a href="https://github.com/BialkowskiSz" class="footer-badge" target="_blank">
-						<i class="fa fa-github"></i>
-					</a>
-					<a href="https://www.linkedin.com/in/szymonbialkowski" class="footer-badge" target="_blank">
-						<i class="fa fa-linkedin"></i>
-					</a>
-					<a href="https://www.linkedin.com/in/szymonbialkowski" class="footer-badge" target="_blank">
-						<i class="fa fa-linkedin"></i>
-					</a>
-	  		</div>
-	  		<div class="col-sm-4">
-	  			<h3 class="footer-copyright">©Engage 2017.
-All rights reserved.</h3>
-	  		</div>
-	  	</div>
-	  </div>
-	</footer>
+	<?php
+        //Print footer
+        require_once('includes/footer.inc.php');
+    ?>
+
+
     <script src="assets/js/file_input.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <!--  JQuery JavaScript     -->

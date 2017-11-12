@@ -7,12 +7,8 @@ require_once('includes/db.inc.php');
 require_once('includes/remember_cookie.inc.php');
 //Include CSRFToken generator
 require_once('includes/csrf_token.inc.php');
-
 //Print function to avoid XSS
-function xss($message)
-{
-    echo(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
-}
+require_once('includes/xss.inc.php');
 
 ?>
 
@@ -48,48 +44,11 @@ function xss($message)
 
 <body>
     <div id="loading"></div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse">
-	        <span class="navbar-toggler-icon"></span>
-	    </button>
-		<a href="index.php">
-			<img class="nav-logo" src="assets/img/logo-black.png" alt="Official Logo of Engage Games">
-		</a>
-		<div class="container-fluid">
-			<div class="row nav-center">
-				<div class="col-sm-12 nav-center">
-					<form class="navbar-form align-middle" role="search">
-			        <div class="input-group nav-search">
-			            <input type="text" class="form-control" placeholder="FIFA 18" name="q">
-			            <div class="input-group-btn">
-			                <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-			            </div>
-			        </div>
-			        </form>
-				</div>
-			</div>
-		</div>
 
-	    <div class="navbar-collapse navbar-toggleable-md collapse dual-collapse">
-	        <ul class="navbar-nav ml-auto">
-	            <li class="nav-item first">
-	                <a class="nav-link text-black nav-item-bold" href="index.php">HOME</a>
-	            </li>
-	            <li class="nav-item second">
-	                <a class="nav-link text-black nav-item-bold" href="catalogue.php">CATALOGUE</a>
-	            </li>
-	            <li class="nav-item third">
-	                <a class="nav-link text-black nav-item-bold" target="_blank" href="https://github.com/SzymonB7/EngageGames">ABOUT</a>
-	            </li>
-	            <hr class="navbar-underline">
-	        </ul>
-	        <hr class="vertical-hr">
-            <?php
-                //Include navbar user shopping cart and profile
-                require_once('includes/shopping_cart_navbar.inc.php');
-            ?>
-	    </div>
-	</nav>
+	<?php
+		//Navbar
+		require_once('includes/navbar.inc.php');
+	?>
 
     <div class="main-body">
         <div class="container">
@@ -132,7 +91,6 @@ function xss($message)
                                     //Genre
                                     if (!empty($_GET['genre']))
                                     {
-
                                         $_GET['genre'] = preg_replace("/[^A-Za-z\s\-]/", "", $_GET['genre']);
 
                                         //Age
@@ -2047,32 +2005,10 @@ function xss($message)
     </div>
 
 
-    <footer>
-	  <div class="container footer-container">
-	  	<div class="row align-items-center">
-	  		<div class="col-sm-4">
-				<a href="#">
-	  				<img class="nav-logo" src="assets/img/logo.png" alt="Official Logo of Engage Games">
-				</a>
-	  		</div>
-	  		<div class="col-sm-4 align-center">
-					<a href="https://github.com/BialkowskiSz" class="footer-badge" target="_blank">
-						<i class="fa fa-github"></i>
-					</a>
-					<a href="https://www.linkedin.com/in/szymonbialkowski" class="footer-badge" target="_blank">
-						<i class="fa fa-linkedin"></i>
-					</a>
-					<a href="https://www.linkedin.com/in/szymonbialkowski" class="footer-badge" target="_blank">
-						<i class="fa fa-linkedin"></i>
-					</a>
-	  		</div>
-	  		<div class="col-sm-4">
-	  			<h3 class="footer-copyright">©Engage 2017.
-                                                All rights reserved.</h3>
-	  		</div>
-	  	</div>
-	  </div>
-	</footer>
+	<?php
+        //Print footer
+        require_once('includes/footer.inc.php');
+    ?>
 
 
     <!--  JQuery JavaScript     -->

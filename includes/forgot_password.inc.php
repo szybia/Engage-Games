@@ -30,7 +30,7 @@ else
         {
             if (strlen($_POST['email']) > 60)
             {
-                redirect("lenght");
+                redirect("length");
             }
             else
             {
@@ -62,7 +62,7 @@ else
 
                         if ($count < 1)
                         {
-                            redirect("nouser");
+                            redirect("invalid");
                         }
                         else
                         {

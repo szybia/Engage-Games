@@ -3,7 +3,7 @@ session_start();
 
 function redirect($message)
 {
-    header("Location: ../profile.php?request=delete&q=$message");
+    header("Location: ../profile.php?request=logout&q=$message");
     exit();
 }
 
