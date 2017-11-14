@@ -336,6 +336,13 @@ if (!empty($_SESSION['email']))
                                             </div>
                                             <?php
                                             break;
+                                        case "successpass":
+                                            ?>
+                                            <div class="alert alert-success" role="alert">
+                                              Password successfully changed.
+                                            </div>
+                                            <?php
+                                            break;
                                     }
                             }
                         }
