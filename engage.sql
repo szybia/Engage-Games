@@ -115,13 +115,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`email`, `username`, `password`, `forgot_password_hash`, `forgot_password_date`, `user_image_path`, `active`, `remember_me_selector`, `remember_me_verifier`) VALUES
-('bialkowski.sz@gmail.com', 'SzymonBialkowski', '$2y$10$BvS7i.RfnkobLX60TypOm.mVvDWRqZ9/YEaTdHab7wzUNmfTh5MhW', NULL, NULL, '503e77826156472d37a2faeeb60bf6.jpg', 0, NULL, NULL);
-
---
 -- Indexes for dumped tables
 --
 
