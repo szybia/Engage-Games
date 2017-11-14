@@ -127,11 +127,15 @@ else
                                                 unset($_COOKIE['remembermeengage']);
                                             }
 
-                                            //Delete old profile picture
-                                            if (is_writable($path . $_SESSION['user_image_path']))
+                                            if ($_SESSION['user_image_path'] != "default.png")
                                             {
-                                                unlink($path . $_SESSION['user_image_path']);
+                                                //Delete old profile picture
+                                                if (is_writable($path . $_SESSION['user_image_path']))
+                                                {
+                                                    unlink($path . $_SESSION['user_image_path']);
+                                                }
                                             }
+
 
                                             session_unset();
                                             session_destroy();

@@ -241,7 +241,6 @@ body {
 .main-body-white-col {
     display: inline-table;
     height: 280px;
-    width: 15%;
     margin: 7px 6px;
     border-radius: 10px;
     background-color: white;

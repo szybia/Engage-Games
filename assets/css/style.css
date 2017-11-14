@@ -356,6 +356,13 @@ footer {
     }
 }
 
+@media screen and (max-height: 880px)
+{
+    footer {
+        position: inherit;
+    }
+}
+
 @media screen and (max-width : 767px) {
     .main-body-img {
         max-height: 75px;

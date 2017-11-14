@@ -57,7 +57,7 @@ else
                 $prepared_statement->execute();
                 $prepared_statement->close();
 
-                redirect("success");
+                redirect("successpass");
             }
         }
 

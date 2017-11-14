@@ -3,6 +3,8 @@ session_start();
 
 //Include CSRFToken generator
 require_once('csrf_token.inc.php');
+//Print function to avoid XSS
+require_once('includes/xss.inc.php');
 
 function redirect($message)
 {
@@ -10,11 +12,6 @@ function redirect($message)
     exit();
 }
 
-//Print function to avoid XSS
-function xss($message)
-{
-    echo(htmlspecialchars($message, ENT_QUOTES, 'UTF-8'));
-}
 
 if (empty($_GET['key']) || empty($_GET['email']))
 {

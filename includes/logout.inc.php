@@ -13,8 +13,22 @@ if (empty($_SESSION['email']))
 }
 else
 {
+
     if (isset($_COOKIE['remembermeengage']))
     {
+        //Include database connection
+        require_once('db.inc.php');
+
+        $empty = null;
+
+        $prepared_statement = $db->prepare("UPDATE USER
+                                            SET remember_me_selector = ?,
+                                                remember_me_verifier = ?
+                                            WHERE EMAIL = ?");
+        $prepared_statement->bind_param("sss", $empty, $empty, $_SESSION['email']);
+        $prepared_statement->execute();
+        $prepared_statement->close();
+
         setcookie(
           "remembermeengage",
           null,
@@ -22,6 +36,9 @@ else
         );
         unset($_COOKIE['remembermeengage']);
     }
+
+
+
 
     session_unset();
     session_destroy();

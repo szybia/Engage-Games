@@ -1,6 +1,6 @@
 var max_quantity_per_product = 9;
 
-$(".btn.btn-outline-dark").click(function()
+$(".btn.btn-outline-dark").click(function(e)
 {
     update = {};
 
@@ -16,11 +16,15 @@ $(".btn.btn-outline-dark").click(function()
 
             if (!$(".logged-in").length)
             {
+                e.stopPropagation();
                 $(".hidden").animate({opacity: "100", height: "50px", padding: "10px"});
             }
             else
             {
                 $(".numberCircle").html(parseInt($(".numberCircle").html()) + 1);
+
+                $(".quantity-error").fadeOut();
+                $(".hidden").fadeOut();
 
                 //Asynchronous communication to set quantity to 0
                 $.ajax({
@@ -33,11 +37,13 @@ $(".btn.btn-outline-dark").click(function()
         }
         else
         {
+            e.stopPropagation();
             $(".quantity-error").html("Please enter a number between 1-" + max_quantity_per_product).fadeIn();
         }
     }
     else
     {
+        e.stopPropagation();
         $(".quantity-error").html("Please enter a quantity.").fadeIn();
     }
 });
