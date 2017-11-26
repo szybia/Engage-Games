@@ -3,7 +3,7 @@
 #### Game selling web application utilizing Bootstrap, jQuery, AJAX, PHP, SQL and JS  
 
 ## Personal Demo
-  - https://www.youtube.com
+  - https://youtu.be/w-IQOgN1-MI
 
 ### Security attack prevention:  
 - SQL Injection  
@@ -22,12 +22,14 @@
   * JS used for smooth transitions
 * Profile picture add, change and delete
   - Security checks ensure no malicious file is uploaded (php, js etc.)
-- Catalogue with sorting algorithm for newest, low-high, high-low or default random
-* Change name, email, password functionality with all required error checking
-- Include PHP files check for direct calls and reject them
-* 404 page included to ensure user doesn't get derailed from their experience
-- Slideshow on home page for highlighting offers and deals
-* Static design implemented before development for boosted productivity
+- PHP POST Security
+  * All inputs put through size, REGEX and format checks.
+* Catalogue with sorting algorithm for newest, low-high, high-low or default random
+- Change name, email, password functionality with all required error checking
+* Include PHP files check for direct calls and reject them
+- 404 page included to ensure user doesn't get derailed from their experience
+* Slideshow on home page for highlighting offers and deals
+- Static design implemented before development for boosted productivity
 
 ### Resources:
 - XAMPP
