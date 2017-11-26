@@ -30,6 +30,7 @@
 - 404 page included to ensure user doesn't get derailed from their experience
 * Slideshow on home page for highlighting offers and deals
 - Static design implemented before development for boosted productivity
+* Fully responsive website design accomplished with media queries.
 
 ### Resources:
 - XAMPP
